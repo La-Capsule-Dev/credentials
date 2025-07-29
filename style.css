@@ -1,11 +1,69 @@
 :root {
-    --background: #18181b;
-    --primary: #3b82f6;
-    --secondary: #ec700d;
-    --accent: #302d7e;
+    --background: rgb(24, 24, 27);
+    --primary: #fed343;
+    --secondary: #eb5f42;
+    --accent: #423a88;
     --text: #e4e4e7;
 }
 
+@font-face {
+    font-family: "Poppins";
+    src: url("./assets/fonts/Poppins-Regular.ttf");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url("./assets/fonts/Poppins-SemiBold.ttf");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@keyframes blob1 {
+    0% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    25% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+    50% {
+        border-radius: 50% 30% 60% 40% / 40% 70% 50% 30%;
+    }
+    75% {
+        border-radius: 70% 40% 30% 60% / 30% 60% 70% 40%;
+    }
+    100% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+}
+
+@keyframes blob2 {
+    0% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+    33% {
+        border-radius: 60% 30% 40% 70% / 40% 50% 60% 30%;
+    }
+    66% {
+        border-radius: 40% 70% 60% 30% / 70% 40% 30% 60%;
+    }
+    100% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+}
+
+@keyframes blob3 {
+    0% {
+        border-radius: 50% 30% 60% 40% / 40% 70% 50% 30%;
+    }
+    50% {
+        border-radius: 30% 50% 40% 60% / 60% 40% 30% 70%;
+    }
+    100% {
+        border-radius: 50% 30% 60% 40% / 40% 70% 50% 30%;
+    }
+}
 * {
     margin: 0;
     padding: 0;
@@ -17,15 +75,71 @@ body {
     color: var(--text);
     padding: 30px;
     height: 100vh;
+    position: relative;
+    overflow: hidden;
+    font-family: "Poppins", sans-serif;
+
+    .gradient {
+        width: 700px;
+        height: 700px;
+        position: absolute;
+        top: -10%;
+        left: -10%;
+        background: linear-gradient(
+            45deg,
+            var(--primary) 0%,
+            var(--secondary) 40%,
+            var(--accent) 70%,
+            var(--accent) 100%
+        );
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        filter: blur(50px);
+        z-index: -1;
+        animation: blob1 8s ease-in-out infinite;
+
+        &:nth-child(1) {
+            top: unset;
+            left: unset;
+            right: -10%;
+            bottom: -10%;
+            background: linear-gradient(
+                45deg,
+                var(--primary) 0%,
+                var(--secondary) 40%,
+                var(--accent) 70%,
+                var(--accent) 100%
+            );
+            border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            animation: blob2 5s ease-in-out infinite;
+        }
+
+        &:nth-child(2) {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(
+                45deg,
+                var(--primary) 0%,
+                var(--secondary) 40%,
+                var(--accent) 70%,
+                var(--accent) 100%
+            );
+            border-radius: 50% 30% 60% 40% / 40% 70% 50% 30%;
+            animation: blob3 12s ease-in-out infinite;
+        }
+    }
 
     main {
-        width: 100%;
+        margin: 0 auto;
+        width: 75%;
         height: 100%;
         display: flex;
         flex-direction: column;
         gap: 15px;
-        background: #e4e4e715;
-        border-radius: 10px;
+        background: rgba(228, 228, 231, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
         padding: 30px;
 
         .team {
@@ -33,31 +147,48 @@ body {
             flex: 1;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
 
             article {
                 width: 50%;
                 height: 100%;
-                max-width: 300px;
+                max-width: 350px;
+                max-height: 600px;
                 display: flex;
                 flex-direction: column;
-                background: var(--accent);
-                border-radius: 10px;
+                backdrop-filter: blur(15px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 20px;
                 overflow: hidden;
-                gap: 15px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+                transition: all 0.3s ease;
 
                 img {
-                    flex: 2;
+                    flex: 3;
+                    width: 100%;
+                    height: 70%;
                     object-fit: cover;
+                    object-position: center;
                 }
 
                 .text {
                     display: flex;
                     flex-direction: column;
-                    gap: 5px;
-                    padding: 15px;
+                    gap: 8px;
+                    padding: 20px;
+                    background: rgba(24, 24, 27, 0.5);
+                    backdrop-filter: blur(10px);
+                }
+
+                a {
+                    color: var(--primary);
+                    text-decoration: none;
                 }
             }
+        }
+
+        h2 {
+            font-weight: lighter;
         }
     }
 }
